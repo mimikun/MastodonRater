@@ -105,6 +105,11 @@ const SERVERS = {
 	"https://pic.otos.red": {
 		CLIENTID: "9553ec2165a464d5ea72a09945c7f7b0c125da7002a373dd9c1b2df3e94fc913",
 		SECRETID: "eb5cd8d092bd65b3236b3d305e351ef576fb64408469067b0e6712028cde554b"
+	},
+
+  "https://mstdn.mimikun.jp": {
+		CLIENTID: "13fabe01da24f1698f36b5511eb5fd350e41698d836fe3ad8836e5b73cbe3aad",
+		SECRETID: "adac36f1c52ceb871104842bf4b6553d7a3b77984be4bc757e508881989defbb"
 	}
 }
 
@@ -129,7 +134,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 	let query = location.querySort();
-	
+
 	if (appInfo.accessToken) {
 		app = new MastodonAPI({ instance: appInfo.instance, api_user_token: appInfo.accessToken });
 
@@ -141,7 +146,7 @@ window.addEventListener("DOMContentLoaded", () => {
 		app.getAccessTokenFromAuthCode(SERVERS[appInfo.instance].CLIENTID, SERVERS[appInfo.instance].SECRETID, appInfo.redirectUrl, query.CODE, res => {
 			appInfo.tootArea = "public",
 			appInfo.accessToken = res.access_token;
-			
+
 			location.href = appInfo.redirectUrl;
 		});
 	}
@@ -153,7 +158,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	let authForm = document.getElementById(IDS.AUTH.FORM.ROOT);
 		authForm.querySelector(`#${IDS.AUTH.FORM.SUBMIT}`).addEventListener("click", () => {
 			let instanceUrl = new mdc.select.MDCSelect(authForm.querySelector(`#${IDS.AUTH.FORM.INSTANCE.ROOT}`));
-			
+
 			if (instanceUrl.value) {
 				appInfo.instance = instanceUrl.value;
 				app = new MastodonAPI({ instance: appInfo.instance });
@@ -265,7 +270,7 @@ window.addEventListener("DOMContentLoaded", () => {
 									Relevance.getBoostsAndMentions(myself.id, friends, date).then(res => friends = res).then(() => {
 										Relevance.getStars(friends, date).then(res => friends = res).then(() => {
 											let scores = [];
-											
+
 											for (let friend of friends) {
 												if (friend) {
 													scores.push([friend.acct, friend.star * Relevance.STAR + friend.boost * Relevance.BOOST + friend.mention * Relevance.MENTION]);
@@ -342,9 +347,9 @@ window.addEventListener("DOMContentLoaded", () => {
 		})();
 
 
-	
+
 	let query = location.querySort();
-	
+
 	if (!appInfo.accessToken && !query.CODE) {
 		let instances = authForm.querySelector(`#${IDS.AUTH.FORM.INSTANCE.SELECTOR}`);
 
