@@ -110,7 +110,7 @@ const SERVERS = {
   "https://mstdn.mimikun.jp": {
     CLIENTID: "13fabe01da24f1698f36b5511eb5fd350e41698d836fe3ad8836e5b73cbe3aad",
     SECRETID: "adac36f1c52ceb871104842bf4b6553d7a3b77984be4bc757e508881989defbb"
-  }
+  },
 }
 
 
